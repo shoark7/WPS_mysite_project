@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 import json
 import os
 
+DEBUG = True
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -25,10 +27,6 @@ STATIC_DIR = os.path.join(BASE_DIR, 'static')
 TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
 
 
-# Static files
-STATICFILES_DIRS = [
-    STATIC_DIR,
-]
 
 # Auth
 AUTH_USER_MODEL = 'member.MyUser'
@@ -39,14 +37,14 @@ AUTHENTICATION_BACKENDS = [
 
 
 # Email
-EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST = config['email']['EMAIL_HOST']
 # EMAIL_PORT = '587'
-EMAIL_PORT = '587'
+EMAIL_PORT = config['email']['EMAIL_PORT']
 # EMAIL_HOST_USER = 'fastcampus.2016@gmail.com'
-EMAIL_HOST_USER = 'shoark7@gmail.com'
+EMAIL_HOST_USER = config['email']['EMAIL_HOST_USER']
 # EMAIL_HOST_PASSWORD = 'fastcampus'
-EMAIL_HOST_PASSWORD = 'kube142857'
-EMAIL_USE_TLS = True
+EMAIL_HOST_PASSWORD = config['email']['EMAIL_HOST_PASSWORD']
+EMAIL_USE_TLS = config['email']["EMAIL_USE_TLS"]
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 
@@ -57,14 +55,14 @@ DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 SECRET_KEY = 'r5smmf=5$8pihr+g3azx%)v+^%xh1zst1)8qi@v^n+^aga9*qo'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+
 
 ALLOWED_HOSTS = []
 
 
 # Facebook
-FACEBOOK_APP_ID = '1365062093533920'
-FACEBOOK_SECRET_CODE = 'b88b3c7e1e57c8e3855ff2abba412f9e'
+FACEBOOK_APP_ID = config['facebook']["FACEBOOK_APP_ID"]
+FACEBOOK_SECRET_CODE = config['facebook']["FACEBOOK_SECRET_CODE"]
 
 
 # Application definition
@@ -154,16 +152,16 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'Asia/Seoul'
-
-
 USE_I18N = True
-
 USE_L10N = True
-
 USE_TZ = True
+
 
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    STATIC_DIR,
+]
