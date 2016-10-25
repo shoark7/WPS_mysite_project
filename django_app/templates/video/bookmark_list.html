@@ -1,0 +1,23 @@
+{% extends 'common/base.html' %}
+
+{% block content %}
+
+<!-- 검색화면으로 가기 버튼 구현 -->
+<a href="{% url 'video:search' %}" class="btn btn-primary">Search videos...</a>
+
+<ul>
+	{% for video in videos %}
+	<li>
+		<a href="{% url 'video:bookmark_detail' pk=video.pk %}">
+			<img src="{{ video.thumbnail }}" alt="">
+		</a>
+		<p>Title : {{ video.title }}</p>
+		<p>Description : {{ video.description }}</p>
+		<p>Published : {{ video.published_date|date:"Y.m.d" }}</p>
+        <a href="{% url 'video:bookmark_delete' pk=video.id %}"><p>영상 삭제</p></a>
+	</li>
+	{% endfor %}
+</ul>
+
+
+{% endblock %}
