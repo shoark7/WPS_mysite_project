@@ -82,6 +82,7 @@ INSTALLED_APPS = [
     'member',
     'video',
     'sns',
+    'photo',
 ]
 
 MIDDLEWARE = [
