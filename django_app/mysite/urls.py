@@ -17,6 +17,9 @@ from django.conf.urls import url, include
 from django.contrib import admin
 # from blog import views as blog_views
 from mysite import views
+from django.conf import settings
+from django.conf.urls.static import static
+
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -29,4 +32,6 @@ urlpatterns = [
     url(r'^member/', include('member.urls', namespace='member')),
     url(r'^video/', include('video.urls', namespace='video')),
     url(r'^sns/', include('sns.urls', namespace='sns')),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+# print(static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT))

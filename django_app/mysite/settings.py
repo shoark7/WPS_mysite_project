@@ -166,3 +166,9 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     STATIC_DIR,
 ]
+
+
+# media files
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+# 앞에 /를 넣으면 처음부터 절대경로, 안 넣으면 상대경로

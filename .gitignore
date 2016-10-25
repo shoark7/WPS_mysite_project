@@ -176,3 +176,5 @@ pip-selfcheck.json
 *.sqlite3
 .idea/
 */.conf/
+
+media/
