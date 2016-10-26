@@ -29,3 +29,26 @@ def photo_add(request, album_id):
         form = PhotoForm()
         context['form'] = form
     return render(request, 'photo/photo_add.html', context)
+
+
+def photo_like(request, photo_id):
+    user = request.user
+    photo = Photo.objects.get(pk=photo_id)
+    album_id = photo.album.id
+    PhotoLike.objects.create(
+        photo=photo,
+        user=user,
+    )
+    return redirect('photo:album_detail', album_id=album_id)
+
+
+
+def photo_dislike(request, photo_id):
+    user = request.user
+    photo = Photo.objects.get(pk=photo_id)
+    album_id = photo.album.id
+    PhotoDislike.objects.create(
+        photo=photo,
+        user=user,
+    )
+    return redirect('photo:album_detail', album_id)

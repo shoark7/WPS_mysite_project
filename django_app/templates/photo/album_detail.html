@@ -8,7 +8,11 @@
 {% for photo in photos %}
 <li>
     <p>{{ photo.title }}</p>
-    <img src="{{ photo.img.url }}" alt="사진 꼭이요~!">
+    <img src="{{ photo.img.url }}" alt="사진 꼭이요~!" style="display:block;">
+    <a href="{% url 'photo:photo_like' photo_id=photo.id %}"><button>좋아요 ㅎㅎ</button></a>
+    <span>{{ photo.photolike_set.count }}</span>
+    <a href="{% url 'photo:photo_dislike' photo_id=photo.id %}"><button style="margin:10px 0 40px 0;">싫어요 ㅋ</button></a>
+    <span>{{ photo.photodislike_set.count }}</span>
 </li>
 {% empty %}
 <p> NO photos now.</p>
