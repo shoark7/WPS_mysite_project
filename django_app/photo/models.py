@@ -1,7 +1,7 @@
-from django.db import models
-# from django.contrib.auth import get_user_model
 from django.conf import settings
-# Create your models here.
+# 1.
+from django.db import models
+# 2. from django.contrib.auth import get_user_model
 
 class Album(models.Model):
     title = models.CharField(max_length=30)

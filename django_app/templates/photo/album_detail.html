@@ -1,0 +1,19 @@
+{% extends 'common/base.html' %}
+
+{% block content %}
+<h3>{{ album.title }}</h3>
+<a href="{% url 'photo:photo_add' album_id=album.id %}">
+    <button>사진 추가</button></a>
+<ul>
+{% for photo in photos %}
+<li>
+    <p>{{ photo.title }}</p>
+    <img src="{{ photo.img.url }}" alt="사진 꼭이요~!">
+</li>
+{% empty %}
+<p> NO photos now.</p>
+
+{% endfor %}
+</ul>
+
+{% endblock content %}

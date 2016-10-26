@@ -54,7 +54,7 @@ def signup(request):
         )
 
         # 생성한 유저 로그인
-        auth_login(request, user)
+        auth_login(request, user,backend='django.contrib.auth.backends.ModelBackend')
         return redirect('blog:post_list')
     else:
         # member/signup.html 파일을 render
