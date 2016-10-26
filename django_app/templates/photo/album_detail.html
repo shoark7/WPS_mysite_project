@@ -14,7 +14,9 @@
 <li>
     <div style="margin:auto; width:60%">
         <h4>{{ forloop.counter}}. {{photo.title }}</h4>
-
+        {{ photo.img.url }}<br>
+        {{ photo.img }}<br>
+        {{ photo.img.name }}<br>
 
         <img style='margin-bottom:20px;' width="100%" src="{{ photo.img.url }}" alt="사진 꼭이요~!" style="display:block;">
         <p style="text-indent:20px;">{{ photo.description }}</p>

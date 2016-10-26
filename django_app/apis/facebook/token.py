@@ -32,7 +32,7 @@ def get_access_token(code, redirect_url):
     REDIRECT_URL = redirect_url
 
     # 받은 'code'값과 client_id, client_secret값을 사용해서 access_token을 얻는다
-    url_request_access_token = ' https://graph.facebook.com/v2.8/oauth/access_token?' \
+    url_request_access_token = 'https://graph.facebook.com/v2.8/oauth/access_token?' \
                                'client_id={client_id}&' \
                                'redirect_uri={redirect_uri}&' \
                                'client_secret={client_secret}&' \
