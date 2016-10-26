@@ -1,6 +1,21 @@
 {% extends 'common/base.html' %}
 
 {% block content %}
+<a href="{% url 'photo:album_add' %}">앨범 추가하기</a>
+<div style="float:right">
+    <form action="{% url 'photo:album_delete' %}" method="POST">
+    {% csrf_token %}
+        <select name="album_id">
+            <option>앨범을 선택하세요.</option>
+{% for album in albums %}
+            <option value="{{ album.id }}" >{{ album.title }}</option>
+{% endfor %}
+        </select>
+
+        <button>삭제하기</button>
+    </form>
+    <p style="color:red">주의 : 앨범을 삭제하면 해당 앨범의 모든 사진이 삭제됩니다.<br> 마음의 준비가 되었습니까?</p>
+</div>
 {% for album in albums %}
 
 <h3><a href="{% url 'photo:album_detail' album_id=album.id %}">{{ album.title }}</a></h3>

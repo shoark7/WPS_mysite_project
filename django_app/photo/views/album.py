@@ -40,3 +40,16 @@ def album_detail(request, album_id):
         'photos': all_photos,
     }
     return render(request, 'photo/album_detail.html', context)
+
+
+def album_delete(request):
+    print(request.POST['album_id'])
+    if request.method == 'POST':
+        try:
+            album_id = request.POST['album_id']
+        except KeyError:
+            pass
+        else:
+            album_to_be_deleted = Album.objects.get(pk=album_id)
+            album_to_be_deleted.delete()
+    return redirect('photo:album_list')

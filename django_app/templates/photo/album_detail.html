@@ -2,21 +2,28 @@
 
 {% block content %}
 <h3>{{ album.title }}</h3>
+<div style="float:right">
+    <a href="{% url 'photo:album_list' %}">
+    <button>앨범 목록으로..</button>
+    </a>
+</div>
 <a href="{% url 'photo:photo_add' album_id=album.id %}">
     <button style="margin-bottom: 40px;">사진 추가</button></a>
-<ul>
+<ul style="list-style-type:none;">
 {% for photo in photos %}
 <li>
-    <h4>{{ photo.title }}</h4>
-    <p>{{ photo.description }}</p>
+    <div style="margin:auto; width:60%">
+        <h4>{{ forloop.counter}}. {{photo.title }}</h4>
 
-    <img src="{{ photo.img.url }}" alt="사진 꼭이요~!" style="display:block;">
-    <a href="{% url 'photo:photo_like' photo_id=photo.id %}"><button>좋아요 ㅎㅎ</button></a>
-    <span>{{ photo.photolike_set.count }}</span>
-    <a href="{% url 'photo:photo_dislike' photo_id=photo.id %}"><button style="margin:10px 0 40px 0;">싫어요 ㅋ</button></a>
-    <span>{{ photo.photodislike_set.count }}</span>
-    <a href="{% url 'photo:photo_delete' photo.id %}"><span>사진 삭제</span></a>
 
+        <img style='margin-bottom:20px;' width="100%" src="{{ photo.img.url }}" alt="사진 꼭이요~!" style="display:block;">
+        <p style="text-indent:20px;">{{ photo.description }}</p>
+        <a href="{% url 'photo:photo_like' photo_id=photo.id %}"><button style="margin-bottom:30px;">좋아요 ㅎㅎ</button></a>
+        <span>{{ photo.photolike_set.count }}</span>
+        <a href="{% url 'photo:photo_dislike' photo_id=photo.id %}"><button style="margin:10px 0 40px 0;">싫어요 ㅋ</button></a>
+        <span style='margin-right:400px;'>{{ photo.photodislike_set.count }}</span>
+        <a href="{% url 'photo:photo_delete' photo.id %}"><span>사진 삭제</span></a>
+    </div>
 </li>
 {% empty %}
 <p> NO photos now.</p>
