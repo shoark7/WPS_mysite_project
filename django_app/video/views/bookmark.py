@@ -14,6 +14,7 @@ def bookmark_add(request):
     path = request.POST.get('path')
     try:
         kind = request.POST['kind']
+
         video_id = request.POST['video_id']
         title = request.POST['title']
         description = request.POST['description']
@@ -22,12 +23,16 @@ def bookmark_add(request):
 
         video = Video.objects.create(
             kind=kind,
+
             youtube_id=video_id,
             title=title,
             description=description,
             published_date=published_date,
             thumbnail=thumbnail_url
         )
+        video.users.add(request.user)
+        video.save()
+
         msg = '%s 영상을 북마크에 등록했습니다' % (
             video.title
         )
@@ -45,7 +50,7 @@ def bookmark_list(request):
     """
     추가한 Video인스턴스 목록을 보여주는 페이지
     """
-    videos = Video.objects.all()
+    videos = Video.objects.filter(users=request.user)
     context = {
         'videos': videos,
     }
