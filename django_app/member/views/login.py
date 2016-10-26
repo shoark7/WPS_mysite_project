@@ -13,7 +13,7 @@ __all__ = [
 
 
 def login(request):
-    next = request.GET.get('next')
+    next = request.path
     if request.method == 'POST':
         try:
             username = request.POST['username']

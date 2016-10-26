@@ -9,7 +9,7 @@
 
 
 {% empty %}
-<p>NO albums available. </p>
+<p>NO albums available. <a href="{% url 'photo:album_add' %}">앨범 추가하기</a></p>
 
 {% endfor %}
 {% endblock content %}

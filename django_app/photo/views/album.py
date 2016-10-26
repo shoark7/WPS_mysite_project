@@ -29,7 +29,7 @@ def album_add(request):
 
 
 def album_list(request):
-    albums = Album.objects.all()
+    albums = Album.objects.filter(owner=request.user)
     return render(request, 'photo/album_list.html', {'albums': albums})
 
 def album_detail(request, album_id):
