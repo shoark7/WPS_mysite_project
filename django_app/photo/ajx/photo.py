@@ -23,10 +23,11 @@ def photo_like(request, photo_id, like_type='like'):
         user=user,
         photo=photo,
     )
+    is_delete = False
 
     if user_model_exists.exists():
         user_model_exists.delete()
-        msg = 'deleted'
+        is_delete = True
     else:
         like_model.objects.create(
             user=user,
@@ -36,9 +37,13 @@ def photo_like(request, photo_id, like_type='like'):
             user=user,
             photo=photo,
         ).delete()
-        msg = 'created'
+        # msg = 'created'
     ret = {
-        'msg111': msg
+        'like_count': photo.like_users.count(),
+        'dislike_count': photo.dislike_users.count(),
+        'user_like': True if photo.like_sers.filter(id=request.user.id).exists() else False,
+        'user_dislike': True if photo.dislike_users.filter(id=request.user.pk).exists() else False,
     }
+
 
     return HttpResponse(json.dumps(ret), content_type='application/json')

@@ -19,8 +19,12 @@
         <img style='margin-bottom:20px;' src="{% if photo.img_thumbnail %}{{ photo.img_thumbnail.url }}{% else %}{{photo.img.url}}{% endif %}" alt="사진 꼭이요~!" style="display:block;">
         <p style="text-indent:20px;">{{ photo.description }}</p>
 
-        <button onclick='photoLike({{ photo.pk }}, "like")' class="btn label label_default">
-            {{ photo.like_users.count }}
+        <button id='btn-photo{{photo.id}}-like' onclick='photoLike({{ photo.pk }}, "like")' class="btn label label_default">
+            <span id="photo-{{ photo.pk }}-like-count">{{ photo.like_users.count }}</span>
+        </button>
+
+        <button id='btn-photo{{ photo.id}}-dislike' onclick='photoLike({{ photo.pk }}, "dislike")' class="btn label label_default">
+            <span id="photo-{{ photo.pk }}-dislike-count">{{ photo.dislike_users.count }}</span>
         </button>
 
         {% comment %}
@@ -42,7 +46,5 @@
 
 
 {% block script %}
-<script src="{% static 'js/photo/album_detail.js' %}">
-
-</script>
+<script src="{% static 'js/photo/album_detail.js' %}"></script>
 {% endblock script %}
