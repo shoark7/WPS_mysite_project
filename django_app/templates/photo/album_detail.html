@@ -13,18 +13,30 @@
 {% for photo in photos %}
 <li>
     <div style="margin:auto; width:60%">
-        <h4>{{ forloop.counter}}. {{photo.title }}</h4>
-        {{ photo.img.url }}<br>
-        {{ photo.img }}<br>
-        {{ photo.img.name }}<br>
+        <h4>{{ forloop.counter}}. {{ photo.title }}</h4>
 
-        <img style='margin-bottom:20px;' width="100%" src="{{ photo.img.url }}" alt="사진 꼭이요~!" style="display:block;">
+        {# <img style='margin-bottom:20px;' src="{% if photo.img_thumbnail %}{{ photo.img_thumbnail.url }}{% else %}{{photo.img.url}}{% endif %}" alt="사진 꼭이요~!" style="display:block;"> #}
         <p style="text-indent:20px;">{{ photo.description }}</p>
+
+        <form action="{% url 'photo:photo_like' photo_id=photo.id like_type='like' %}" method="POST">
+            {% csrf_token %}
+            <button type="submit">좋아요</button>
+            <span>{{ photo.like_users.count }}</span>
+        </form>
+        <form action="{% url 'photo:photo_like' photo_id=photo.id like_type='dislike' %}" method="POST">
+            {% csrf_token %}
+            <button type="submit">싫어요</button>
+            <span>{{ photo.dislike_users.count }}</span>
+        </form>
+
+
+        {% comment %}
         <a href="{% url 'photo:photo_like' photo_id=photo.id %}"><button style="margin-bottom:30px;">좋아요 ㅎㅎ</button></a>
         <span>{{ photo.photolike_set.count }}</span>
         <a href="{% url 'photo:photo_dislike' photo_id=photo.id %}"><button style="margin:10px 0 40px 0;">싫어요 ㅋ</button></a>
         <span style='margin-right:400px;'>{{ photo.photodislike_set.count }}</span>
         <a href="{% url 'photo:photo_delete' photo.id %}"><span>사진 삭제</span></a>
+        {% endcomment %}
     </div>
 </li>
 {% empty %}
