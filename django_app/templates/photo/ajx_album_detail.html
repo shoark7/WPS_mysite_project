@@ -1,4 +1,5 @@
 {% extends 'common/base.html' %}
+{% load static %}
 
 {% block content %}
 <h3>{{ album.title }}</h3>
@@ -18,17 +19,9 @@
         <img style='margin-bottom:20px;' src="{% if photo.img_thumbnail %}{{ photo.img_thumbnail.url }}{% else %}{{photo.img.url}}{% endif %}" alt="사진 꼭이요~!" style="display:block;">
         <p style="text-indent:20px;">{{ photo.description }}</p>
 
-        <form action="{% url 'photo:photo_like' photo_id=photo.id like_type='like' %}" method="POST">
-            {% csrf_token %}
-            <button type="submit">좋아요</button>
-            <span>{{ photo.like_users.count }}</span>
-        </form>
-        <form action="{% url 'photo:photo_like' photo_id=photo.id like_type='dislike' %}" method="POST">
-            {% csrf_token %}
-            <button type="submit">싫어요</button>
-            <span>{{ photo.dislike_users.count }}</span>
-        </form>
-
+        <button onclick='photoLike({{ photo.pk }}, "like")' class="btn label label_default">
+            {{ photo.like_users.count }}
+        </button>
 
         {% comment %}
         <a href="{% url 'photo:photo_like' photo_id=photo.id %}"><button style="margin-bottom:30px;">좋아요 ㅎㅎ</button></a>
@@ -49,8 +42,7 @@
 
 
 {% block script %}
-<script>
-
+<script src="{% static 'js/photo/album_detail.js' %}">
 
 </script>
 {% endblock script %}

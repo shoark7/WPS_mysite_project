@@ -39,7 +39,10 @@ def album_detail(request, album_id):
         'album': the_album,
         'photos': all_photos,
     }
-    return render(request, 'photo/album_detail.html', context)
+    template_file = 'photo/ajx_album_detail.html'
+    # template_file = 'photo/album_detail.html'
+
+    return render(request, template_file, context)
 
 
 def album_delete(request):
